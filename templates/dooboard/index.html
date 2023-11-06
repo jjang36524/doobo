@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    {% if player_list %}
+    <div class="tpos"><h1>투수</h1></div>
+    {% for player in player_list %}
+    {% if player.pitcherdata_set.count %}
+    <div class="box">
+        <img class="img" src="{{player.image}}" alt="선수 사진">
+        <div class="upperinfo">
+            <span class="largetext">#{{player.no}}</span><br>
+            <span class="largetext">{{player.name}}</span><br>
+            <span class="largetext">{{player.position}}</span><br>
+            
+        </div>
+        <div class="lower">
+            <span class="smalltext">{{player.birth|date:"Y/n/j"}}</span><br>
+            <span class="smalltext">{{player.enter}}년 입단, 연봉 
+            {% if player.pay > 9999 %}
+            {{player.altpay}}억
+            {%else%}
+            {{player.pay}}만
+            {%endif%}</span><br>
+            <span class="smalltext">통산 방어율 {{player.pitcherdata_set.all.first.ERA}}</span><br>
+            <span class="smalltext">{{handtype}}</span><br>
+            <br>
+            <span class="smalltext">댓글 152개</span><br>
+        </div>
+    </div>
+    {% endif %}
+    {%endfor%}
+    <div class="tpos"><h1>타자</h1></div>
+    {% for player in player_list %}
+    {% if player.batterdata_set.count %}
+    <div class="box">
+        <img class="img" src="{{player.image}}" alt="선수 사진">
+        <div class="upperinfo">
+            <span class="largetext">#{{player.no}}</span><br>
+            <span class="largetext">{{player.name}}</span><br>
+            <span class="largetext">{{player.position}}</span><br>
+            
+        </div>
+        <div class="lower">
+            <span class="smalltext">{{player.birth|date:"Y/n/j"}}</span><br>
+            <span class="smalltext">{{player.enter}}년 입단, 연봉 
+            {% if player.pay > 9999 %}
+            {{player.altpay}}억
+            {%else%}
+            {{player.pay}}만
+            {%endif%}</span><br>
+            <span class="smalltext">통산 타율 {{player.batterdata_set.all.first.AVG}}</span><br>
+            <span class="smalltext">{{handtype}}</span><br>
+            <br>
+            <span class="smalltext">댓글 152개</span><br>
+        </div>
+    </div>
+    {% endif %}
+    {%endfor%}
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,55 @@
+:root {
+    --doonavy:#131230;
+    --doored:#ED1C24;
+    --doogray:#839494;
+}
+
+.box{
+    float: left;
+    width: 320px;
+    height:420px;
+    border-radius: 8px;
+    overflow: hidden;
+    padding:10px;
+    position: relative;
+    border: 5px solid var(--doogray);
+    margin: 50px;
+}
+.box:hover {
+    box-shadow: 0 10px 10px rgba(0,0,0,0.22);
+    transform: translateY(-10px);
+    border: 5px solid var(--doored);
+}
+.box .img {
+    display: inline-block;
+    width: 174px;
+    height: 184px;
+    padding: 0;
+    border:3px solid var(--doonavy);
+}
+.upperinfo{
+    display: inline-block;
+    width: 120px;
+    height: 190px;
+    position: absolute;
+    top:10px;
+    left:190px;
+}
+.largetext{
+    display: inline-block;
+    width: 120px;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+.smalltext{
+    display: inline-block;
+    width: 280px;
+    margin: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.tpos{
+    float: left;
+    width: 100%;
+}
