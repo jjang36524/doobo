@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
+    <div class="entireboard">
     {% if player_list %}
     <div class="tpos"><h1>투수</h1></div>
     {% for player in player_list %}
     {% if player.pitcherdata_set.count %}
-    <a href="{% url 'detail' player.id %}">
+    <a href="{% url 'doobo:detail' player.id %}">
         <div class="box">
             <img class="img" src="{{player.image}}" alt="선수 사진">
             <div class="upperinfo">
@@ -34,7 +35,7 @@
     <div class="tpos"><h1>타자</h1></div>
     {% for player in player_list %}
     {% if player.batterdata_set.count %}
-    <a href="{% url 'detail' player.id %}">
+    <a href="{% url 'doobo:detail' player.id %}">
         <div class="box">
             <img class="img" src="{{player.image}}" alt="선수 사진">
             <div class="upperinfo">
@@ -62,4 +63,5 @@
     {% endif %}
     {%endfor%}
     {% endif %}
+</div>
 {%endblock%}

@@ -62,9 +62,10 @@
     padding: 0;
     border:5px solid var(--doonavy);
 }
-.detailbody{
+.entireboard{
     width: 1800px;
     position: relative;
+    margin: 50px;;
 }
 .upperdetail{
     display: inline-block;
@@ -84,7 +85,4 @@
 }
 .named{
     font-size: 40px;
-}
-body{
-    margin: 50px;
 }
