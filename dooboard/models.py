@@ -53,3 +53,7 @@ class BatterDataLS(models.Model):
     hit=models.IntegerField()
     homerun=models.IntegerField()
     BOB=models.IntegerField()
+class Reply(models.Model):
+    player=models.ForeignKey(Player,on_delete=models.CASCADE)
+    content = models.TextField()
+    create_date = models.DateTimeField()

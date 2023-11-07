@@ -1,9 +1,15 @@
 :root {
     --doonavy:#131230;
     --doored:#ED1C24;
-    --doogray:#839494;
+    --doogray:#C7C6C6;
 }
-
+.stroked{
+    text-shadow:
+    -0.5px -0.5px 0 var(--doored),
+    0.5px -0.5px 0 var(--doored),
+    -0.5px 0.5px 0 var(--doored),
+    0.5px 0.5px 0 var(--doored)!important;  
+}
 .box{
     float: left;
     width: 320px;

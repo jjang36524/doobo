@@ -21,5 +21,6 @@ from . import views
 app_name='doobo'
 urlpatterns = [
     path('',views.index,name='index'),
-    path('<int:player_id>',views.detail,name='detail')
+    path('<int:player_id>',views.detail,name='detail'),
+    path('reply/create/<int:player_id>/', views.reply_create, name='reply_create'),
 ]
