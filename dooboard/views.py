@@ -8,3 +8,7 @@ def index(request):
 
     context = {'player_list': player_list,'batterdata':batterdata,'pitcherdata':pitcherdata}
     return render(request, 'dooboard/index.html', context)
+def detail(request, player_id):
+    player = Player.objects.get(id=player_id)
+    context = {'player': player}
+    return render(request, 'dooboard/detail.html', context)

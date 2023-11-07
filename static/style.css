@@ -41,15 +41,50 @@
     margin: 10px;
     font-size: 20px;
     font-weight: bolder;
+    color: var(--doonavy);
 }
 .smalltext{
     display: inline-block;
     width: 280px;
-    margin: 10px;
+    margin: 6px;
     font-size: 16px;
     font-weight: bold;
+    color: var(--doonavy);
 }
 .tpos{
     float: left;
     width: 100%;
+}
+.img2{
+    display: inline-block;
+    width: 294px;
+    height: 314px;
+    padding: 0;
+    border:5px solid var(--doonavy);
+}
+.detailbody{
+    width: 1800px;
+    position: relative;
+}
+.upperdetail{
+    display: inline-block;
+    width: 1490px;
+    height: 190px;
+    position: absolute;
+    top:0px;
+    left:330px;
+}
+.largetextd{
+    display: inline-block;
+    width: 1400px;
+    margin: 10px;
+    font-size: 30px;
+    font-weight: bolder;
+    color: var(--doonavy);
+}
+.named{
+    font-size: 40px;
+}
+body{
+    margin: 50px;
 }

@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="detailbody">
+        <img class="img2" src="{{player.image}}" alt="선수 사진">
+        <div class="upperdetail">
+            <span class="largetextd named">#{{player.no}} {{player.name}}, {{player.position}}</span>
+            <span class="largetextd">{{player.birth|date:"Y/n/j"}}, {{player.enter}}년 입단, 연봉 
+                {% if player.pay > 9999 %}
+                {{player.altpay}}억
+                {%else%}
+                {{player.pay}}만
+                {%endif%}
+            </span>
+            {% if player.pitcherdata_set.count %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>{{player.name}}</th>
+                <th>경기수</th>
+                <th>이닝</th>
+                <th>평균자책점</th>
+                <th>삼진</th>
+                <th>승리</th>
+                <th>패배</th>
+                <th>세이브</th>
+                <th>홀드</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>
+                    통산
+                </th>
+                <th>
+                    {{player.games}}
+                </th>
+                <th>
+                    {{player.pitcherdata_set.all.first.inning}}
+                </th>
+                <th>
+                    {{player.pitcherdata_set.all.first.ERA}}
+                </th>
+                <th>
+                    {{player.pitcherdata_set.all.first.K}}
+                </th>
+                <th>
+                    {{player.pitcherdata_set.all.first.win}}
+                </th>
+                <th>
+                    {{player.pitcherdata_set.all.first.loss}}
+                </th>
+                <th>
+                    {{player.pitcherdata_set.all.first.saves}}
+                </th>
+                <th>
+                    {{player.pitcherdata_set.all.first.hold}}
+                </th>
+
+            </tr>
+            <tr>
+                <th>
+                    2023시즌
+                </th>
+                <th>
+                    {{player.curgames}}
+                </th>
+                <th>
+                    {{player.pitcherdatals_set.all.first.inning}}
+                </th>
+                <th>
+                    {{player.pitcherdatals_set.all.first.ERA}}
+                </th>
+                <th>
+                    {{player.pitcherdatals_set.all.first.K}}
+                </th>
+                <th>
+                    {{player.pitcherdatals_set.all.first.win}}
+                </th>
+                <th>
+                    {{player.pitcherdatals_set.all.first.loss}}
+                </th>
+                <th>
+                    {{player.pitcherdatals_set.all.first.saves}}
+                </th>
+                <th>
+                    {{player.pitcherdatals_set.all.first.hold}}
+                </th>
+
+            </tr>
+        </tbody>
+    </table>
+    {% else %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>{{player.name}}</th>
+                <th>경기수</th>
+                <th>타수</th>
+                <th>타율</th>
+                <th>출루율</th>
+                <th>장타율</th>
+                <th>안타</th>
+                <th>홈런</th>
+                <th>볼넷</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>
+                    통산
+                </th>
+                <th>
+                    {{player.games}}
+                </th>
+                <th>
+                    {{player.batterdata_set.all.first.PA}}
+                </th>
+                <th>
+                    {{player.batterdata_set.all.first.AVG}}
+                </th>
+                <th>
+                    {{player.batterdata_set.all.first.OBP}}
+                </th>
+                <th>
+                    {{player.batterdata_set.all.first.SLG}}
+                </th>
+                <th>
+                    {{player.batterdata_set.all.first.hit}}
+                </th>
+                <th>
+                    {{player.batterdata_set.all.first.homerun}}
+                </th>
+                <th>
+                    {{player.batterdata_set.all.first.BOB}}
+                </th>
+
+            </tr>
+            <tr>
+                <th>
+                    2023시즌
+                </th>
+                <th>
+                    {{player.curgames}}
+                </th>
+                <th>
+                    {{player.batterdatals_set.all.first.PA}}
+                </th>
+                <th>
+                    {{player.batterdatals_set.all.first.AVG}}
+                </th>
+                <th>
+                    {{player.batterdatals_set.all.first.OBP}}
+                </th>
+                <th>
+                    {{player.batterdatals_set.all.first.SLG}}
+                </th>
+                <th>
+                    {{player.batterdatals_set.all.first.hit}}
+                </th>
+                <th>
+                    {{player.batterdatals_set.all.first.homerun}}
+                </th>
+                <th>
+                    {{player.batterdatals_set.all.first.BOB}}
+                </th>
+
+            </tr>
+        </tbody>
+    </table>
+    {% endif %}
+        </div>
+    </div>
+    
+</body>
+</html>
+{%endblock%}
