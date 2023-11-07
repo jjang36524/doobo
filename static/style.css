@@ -5,10 +5,19 @@
 }
 .stroked{
     text-shadow:
-    -0.5px -0.5px 0 var(--doored),
-    0.5px -0.5px 0 var(--doored),
-    -0.5px 0.5px 0 var(--doored),
-    0.5px 0.5px 0 var(--doored)!important;  
+    -2px -2px 0 var(--doonavy),
+    -1px -1px 0 var(--doonavy),
+    -1px 1px 0 var(--doonavy),
+    1px 1px 0 var(--doonavy),
+    1px -1px 0 var(--doonavy),
+    2px -2px 0 var(--doonavy),
+    -2px 2px 0 var(--doonavy),
+    2px 2px 0 var(--doonavy),
+    0px 2px 0 var(--doonavy),
+    -2px 0px 0 var(--doonavy),
+    0px -2px 0 var(--doonavy),
+    2px 0px 0 var(--doonavy)!important;  
+
 }
 .box{
     float: left;
