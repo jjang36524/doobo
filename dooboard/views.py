@@ -48,3 +48,11 @@ def reply_modify(request, reply_id):
         form = ReplyForm(instance=reply)
     context = {'reply': reply, 'form': form}
     return render(request, 'dooboard/reply_form.html', context)
+@login_required(login_url='common:login')
+def reply_delete(request, reply_id):
+    reply = get_object_or_404(Reply, pk=reply_id)
+    if request.user != reply.author:
+        pass
+    else:
+        reply.delete()
+    return redirect('doobo:detail', player_id=reply.player.id)

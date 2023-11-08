@@ -78,9 +78,10 @@
     border:5px solid var(--doonavy);
 }
 .entireboard{
-    width: 1800px;
+    width: 90%;
     position: relative;
-    margin: 50px;;
+    margin: 50px;
+    margin-top: 100px!important;
 }
 .upperdetail{
     display: inline-block;

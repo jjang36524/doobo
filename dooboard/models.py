@@ -59,3 +59,4 @@ class Reply(models.Model):
     player=models.ForeignKey(Player,on_delete=models.CASCADE)
     content = models.TextField()
     create_date = models.DateTimeField()
+    modify_date=models.DateTimeField(null=True)

@@ -9,10 +9,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
     <!-- pybo CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-    <title>Hello, pybo!</title>
+    <title>Dooboard</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" style="background-color: #C7C6C6!important">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom" style="background-color: #C7C6C6!important; position:fixed; top:0px; left:0px; width:100%!important;z-index: 1;">
         <div class="container-fluid">
             <a class="navbar-brand stroked" style="color: #ED1C24!important;font-weight:bolder!important; font-size:24px!important;" href="{% url 'doobo:index' %}">Dooboard</a>
             <button class="navbar-toggler" type="button"
@@ -46,6 +46,18 @@
 
 {% endblock %}
 <script src="{% static 'bootstrap.min.js' %}"></script>
+{% block script %}
+<script type='text/javascript'>
+const delete_elements = document.getElementsByClassName("delete");
+Array.from(delete_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 삭제하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+</script>
+{% endblock %}
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
 </body>
 </html>
