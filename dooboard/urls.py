@@ -17,10 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-
 app_name='doobo'
 urlpatterns = [
     path('',views.index,name='index'),
     path('<int:player_id>',views.detail,name='detail'),
     path('reply/create/<int:player_id>/', views.reply_create, name='reply_create'),
+    path('reply/modify/<int:reply_id>/', views.reply_modify, name='reply_modify'),
 ]

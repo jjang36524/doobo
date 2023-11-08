@@ -1,7 +1,8 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class Player(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     no=models.IntegerField()
     name=models.CharField(max_length=20)
     position=models.CharField(max_length=20)
@@ -54,6 +55,7 @@ class BatterDataLS(models.Model):
     homerun=models.IntegerField()
     BOB=models.IntegerField()
 class Reply(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     player=models.ForeignKey(Player,on_delete=models.CASCADE)
     content = models.TextField()
     create_date = models.DateTimeField()
