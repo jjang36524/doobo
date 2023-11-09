@@ -26,4 +26,6 @@ urlpatterns = [
     path('reply/delete/<int:reply_id>/', views.reply_delete, name='reply_delete'),
     path('player/voteu/<int:player_id>/',views.player_voteu, name='player_voteu'),
     path('player/voted/<int:player_id>/',views.player_voted, name='player_voted'),
+    path('player/rvoteu/<int:reply_id>/',views.reply_voteu, name='reply_voteu'),
+    path('player/rvoted/<int:reply_id>/',views.reply_voted, name='reply_voted'),
 ]

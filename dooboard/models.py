@@ -14,8 +14,8 @@ class Player(models.Model):
     games=models.IntegerField()
     curgames=models.IntegerField()
     image=models.CharField(max_length=200,null=True)
-    voteru = models.ManyToManyField(User,related_name='voteru_question')
-    voterd = models.ManyToManyField(User,related_name='voterd_question')
+    voteru = models.ManyToManyField(User,related_name='voteru_question',null=True)
+    voterd = models.ManyToManyField(User,related_name='voterd_question',null=True)
     def altpay(self):
         return self.pay/10000
 class PitcherData(models.Model):
@@ -62,5 +62,5 @@ class Reply(models.Model):
     content = models.TextField()
     create_date = models.DateTimeField()
     modify_date=models.DateTimeField(null=True)
-    voteru = models.ManyToManyField(User,related_name='voteru_reply')
-    voterd = models.ManyToManyField(User,related_name='voterd_reply')
+    voteru = models.ManyToManyField(User,related_name='voteru_reply',null=True)
+    voterd = models.ManyToManyField(User,related_name='voterd_reply',null=True)

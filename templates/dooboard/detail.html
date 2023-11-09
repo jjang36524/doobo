@@ -174,7 +174,7 @@
                취소
                {%endif%}
                {%endfor%}
-                <span class="badge rounded-pill bg-success">{{player.voteru.count}}</span>
+                <span class="badge rounded-pill bg-success navy">{{player.voteru.count}}</span>
             </a>
 <a href="javascript:void(0)" data-uri="{% url 'doobo:player_voted' player.id  %}"
             class="recommend btn btn-sm btn-outline-secondary">싫어요 {% for i in player.voterd.all%}
@@ -182,7 +182,7 @@
             취소
             {%endif%}
             {%endfor%}
-             <span class="badge rounded-pill bg-success">{{player.voterd.count}}</span>
+             <span class="badge rounded-pill bg-success red">{{player.voterd.count}}</span>
          </a>
 </div>
 
@@ -201,6 +201,22 @@
                 <div>{{ answer.modify_date }}</div>
             </div>
             {% endif %}
+            <a href="javascript:void(0)" data-uri="{% url 'doobo:reply_voteu'  answer.id  %}"
+               class="recommend btn btn-sm btn-outline-secondary"> 좋아요  {% for i in answer.voteru.all%}
+               {%if i.id == user.id %}
+               취소
+               {%endif%}
+               {%endfor%}
+                <span class="badge rounded-pill bg-success navy">{{answer.voteru.count}}</span>
+            </a>
+            <a href="javascript:void(0)" data-uri="{% url 'doobo:reply_voted' answer.id  %}"
+            class="recommend btn btn-sm btn-outline-secondary " >싫어요 {% for i in answer.voterd.all%}
+            {%if i.id == user.id %}
+            취소
+            {%endif%}
+            {%endfor%}
+             <span class="badge rounded-pill bg-success red">{{answer.voterd.count}}</span>
+         </a>
             <div class="my-3" style="float:right!important">
                 {% if request.user == answer.author %}
                 <a href="{% url 'doobo:reply_modify' answer.id  %}" 

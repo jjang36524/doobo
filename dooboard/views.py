@@ -82,3 +82,29 @@ def player_voted(request, player_id):
     else:
         player.voterd.add(request.user)
     return redirect('doobo:detail', player_id=player.id)
+@login_required(login_url='common:login')
+def reply_voteu(request, reply_id):
+    reply= get_object_or_404(Reply, pk=reply_id)
+    v=reply.voteru.all()
+    isin=0
+    for i in v:
+        if i.id==request.user.id:
+            isin=1
+    if isin:
+        reply.voteru.remove(request.user)
+    else:
+        reply.voteru.add(request.user)
+    return redirect('doobo:detail', player_id=reply.player.id)
+@login_required(login_url='common:login')
+def reply_voted(request, reply_id):
+    reply = get_object_or_404(Reply, pk=reply_id)
+    v=reply.voterd.all()
+    isin=0
+    for i in v:
+        if i.id==request.user.id:
+            isin=1
+    if isin:
+        reply.voterd.remove(request.user)
+    else:
+        reply.voterd.add(request.user)
+    return redirect('doobo:detail', player_id=reply.player.id)

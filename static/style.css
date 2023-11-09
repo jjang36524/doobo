@@ -102,3 +102,9 @@
 .named{
     font-size: 40px;
 }
+.navy{
+    background-color:var(--doonavy)!important;
+}
+.red{
+    background-color: var(--doored)!important;
+}
