@@ -168,7 +168,24 @@
         </tbody>
     </table>
     {% endif %}
+    <a href="javascript:void(0)" data-uri="{% url 'doobo:player_voteu' player.id  %}"
+               class="recommend btn btn-sm btn-outline-secondary"> 좋아요  {% for i in player.voteru.all%}
+               {%if i.id == user.id %}
+               취소
+               {%endif%}
+               {%endfor%}
+                <span class="badge rounded-pill bg-success">{{player.voteru.count}}</span>
+            </a>
+<a href="javascript:void(0)" data-uri="{% url 'doobo:player_voted' player.id  %}"
+            class="recommend btn btn-sm btn-outline-secondary">싫어요 {% for i in player.voterd.all%}
+            {%if i.id == user.id %}
+            취소
+            {%endif%}
+            {%endfor%}
+             <span class="badge rounded-pill bg-success">{{player.voterd.count}}</span>
+         </a>
 </div>
+
 <h5 class="border-bottom my-3 py-2">{{player.reply_set.count}}개의 댓글이 있습니다.</h5>
     {% for answer in player.reply_set.all %}
     <div class="card my-3">

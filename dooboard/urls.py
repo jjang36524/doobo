@@ -23,5 +23,7 @@ urlpatterns = [
     path('<int:player_id>',views.detail,name='detail'),
     path('reply/create/<int:player_id>/', views.reply_create, name='reply_create'),
     path('reply/modify/<int:reply_id>/', views.reply_modify, name='reply_modify'),
-     path('reply/delete/<int:reply_id>/', views.reply_delete, name='reply_delete'),
+    path('reply/delete/<int:reply_id>/', views.reply_delete, name='reply_delete'),
+    path('player/voteu/<int:player_id>/',views.player_voteu, name='player_voteu'),
+    path('player/voted/<int:player_id>/',views.player_voted, name='player_voted'),
 ]

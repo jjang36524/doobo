@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 class Player(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE,related_name='author_player')
     no=models.IntegerField()
     name=models.CharField(max_length=20)
     position=models.CharField(max_length=20)
@@ -14,6 +14,8 @@ class Player(models.Model):
     games=models.IntegerField()
     curgames=models.IntegerField()
     image=models.CharField(max_length=200,null=True)
+    voteru = models.ManyToManyField(User,related_name='voteru_question')
+    voterd = models.ManyToManyField(User,related_name='voterd_question')
     def altpay(self):
         return self.pay/10000
 class PitcherData(models.Model):
@@ -55,8 +57,10 @@ class BatterDataLS(models.Model):
     homerun=models.IntegerField()
     BOB=models.IntegerField()
 class Reply(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE,related_name='author_reply')
     player=models.ForeignKey(Player,on_delete=models.CASCADE)
     content = models.TextField()
     create_date = models.DateTimeField()
     modify_date=models.DateTimeField(null=True)
+    voteru = models.ManyToManyField(User,related_name='voteru_reply')
+    voterd = models.ManyToManyField(User,related_name='voterd_reply')

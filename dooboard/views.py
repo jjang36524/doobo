@@ -56,3 +56,29 @@ def reply_delete(request, reply_id):
     else:
         reply.delete()
     return redirect('doobo:detail', player_id=reply.player.id)
+@login_required(login_url='common:login')
+def player_voteu(request, player_id):
+    player = get_object_or_404(Player, pk=player_id)
+    v=player.voteru.all()
+    isin=0
+    for i in v:
+        if i.id==request.user.id:
+            isin=1
+    if isin:
+        player.voteru.remove(request.user)
+    else:
+        player.voteru.add(request.user)
+    return redirect('doobo:detail', player_id=player.id)
+@login_required(login_url='common:login')
+def player_voted(request, player_id):
+    player = get_object_or_404(Player, pk=player_id)
+    v=player.voterd.all()
+    isin=0
+    for i in v:
+        if i.id==request.user.id:
+            isin=1
+    if isin:
+        player.voterd.remove(request.user)
+    else:
+        player.voterd.add(request.user)
+    return redirect('doobo:detail', player_id=player.id)

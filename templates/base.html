@@ -56,6 +56,12 @@ Array.from(delete_elements).forEach(function(element) {
         };
     });
 });
+const recommend_elements = document.getElementsByClassName("recommend");
+Array.from(recommend_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        location.href = this.dataset.uri;
+    });
+});
 </script>
 {% endblock %}
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
