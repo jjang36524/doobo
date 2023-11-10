@@ -5,16 +5,20 @@ from django.utils import timezone
 from django.http import HttpResponseNotAllowed
 from .forms import ReplyForm
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator  
 def index(request):
     player_list = Player.objects.order_by('no')
     batterdata = BatterData.objects.order_by('player')
     pitcherdata = PitcherData.objects.order_by('player')
-
     context = {'player_list': player_list,'batterdata':batterdata,'pitcherdata':pitcherdata}
     return render(request, 'dooboard/index.html', context)
 def detail(request, player_id):
+    page=request.GET.get('page','1')
     player = Player.objects.get(id=player_id)
-    context = {'player': player}
+    replies=player.reply_set.all().order_by('-create_date')
+    paginator = Paginator(replies, 10,allow_empty_first_page=True)  # 페이지당 10개씩 보여주기
+    page_obj = paginator.get_page(page)
+    context = {'reply': page_obj,'player': player}
     return render(request, 'dooboard/detail.html', context)
 @login_required(login_url='common:login')
 def reply_create(request, player_id):

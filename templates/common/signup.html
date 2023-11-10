@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container my-3">
+<div class="container my-3" style="margin-top: 100px!important;">
     <form method="post" action="{% url 'common:signup' %}">
         {% csrf_token %}
         {% include "form_errors.html" %}
         <div class="mb-3">
-            <label for="username">사용자 이름</label>
+            <label for="username">아이디</label>
             <input type="text" class="form-control" name="username" id="username"
                    value="{{ form.username.value|default_if_none:'' }}">
         </div>
@@ -24,7 +24,7 @@
             <input type="text" class="form-control" name="email" id="email"
                    value="{{ form.email.value|default_if_none:'' }}">
         </div>
-        <button type="submit" class="btn btn-primary">생성하기</button>
+        <button type="submit" class="btn btn-primary navy borderblack">생성하기</button>
     </form>
 </div>
 {% endblock %}
