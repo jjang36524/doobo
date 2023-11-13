@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 class Player(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE,related_name='author_player')
     no=models.IntegerField()
     name=models.CharField(max_length=20)
     position=models.CharField(max_length=20)
@@ -39,23 +38,23 @@ class BatterData(models.Model):
     BOB=models.IntegerField()
 class PitcherDataLS(models.Model):
     player=models.ForeignKey(Player,on_delete=models.CASCADE)
-    ERA=models.FloatField()
-    K=models.IntegerField()
-    inning=models.FloatField()
-    win=models.IntegerField()
-    loss=models.IntegerField()
-    saves=models.IntegerField()
-    hold=models.IntegerField()
+    ERAl=models.FloatField()
+    Kl=models.IntegerField()
+    inningl=models.FloatField()
+    winl=models.IntegerField()
+    lossl=models.IntegerField()
+    savesl=models.IntegerField()
+    holdl=models.IntegerField()
    
 class BatterDataLS(models.Model):
     player=models.ForeignKey(Player,on_delete=models.CASCADE)
-    AVG=models.FloatField()
-    OBP=models.FloatField()
-    SLG=models.FloatField()
-    PA=models.IntegerField()
-    hit=models.IntegerField()
-    homerun=models.IntegerField()
-    BOB=models.IntegerField()
+    AVGl=models.FloatField()
+    OBPl=models.FloatField()
+    SLGl=models.FloatField()
+    PAl=models.IntegerField()
+    hitl=models.IntegerField()
+    homerunl=models.IntegerField()
+    BOBl=models.IntegerField()
 class Reply(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE,related_name='author_reply')
     player=models.ForeignKey(Player,on_delete=models.CASCADE)
@@ -64,3 +63,5 @@ class Reply(models.Model):
     modify_date=models.DateTimeField(null=True)
     voteru = models.ManyToManyField(User,related_name='voteru_reply')
     voterd = models.ManyToManyField(User,related_name='voterd_reply')
+class Verified(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)

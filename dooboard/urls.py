@@ -28,4 +28,6 @@ urlpatterns = [
     path('player/voted/<int:player_id>/',views.player_voted, name='player_voted'),
     path('player/rvoteu/<int:reply_id>/',views.reply_voteu, name='reply_voteu'),
     path('player/rvoted/<int:reply_id>/',views.reply_voted, name='reply_voted'),
+    path('add/pitcher', views.pitcher_add, name='pitcher_add'),
+    path('add/batter', views.batter_add, name='batter_add'),
 ]

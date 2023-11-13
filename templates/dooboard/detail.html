@@ -65,25 +65,25 @@
                     {{player.curgames}}
                 </th>
                 <th>
-                    {{player.pitcherdatals_set.all.first.inning}}
+                    {{player.pitcherdatals_set.all.first.inningl}}
                 </th>
                 <th>
-                    {{player.pitcherdatals_set.all.first.ERA}}
+                    {{player.pitcherdatals_set.all.first.ERAl}}
                 </th>
                 <th>
-                    {{player.pitcherdatals_set.all.first.K}}
+                    {{player.pitcherdatals_set.all.first.Kl}}
                 </th>
                 <th>
-                    {{player.pitcherdatals_set.all.first.win}}
+                    {{player.pitcherdatals_set.all.first.winl}}
                 </th>
                 <th>
-                    {{player.pitcherdatals_set.all.first.loss}}
+                    {{player.pitcherdatals_set.all.first.lossl}}
                 </th>
                 <th>
-                    {{player.pitcherdatals_set.all.first.saves}}
+                    {{player.pitcherdatals_set.all.first.savesl}}
                 </th>
                 <th>
-                    {{player.pitcherdatals_set.all.first.hold}}
+                    {{player.pitcherdatals_set.all.first.holdl}}
                 </th>
 
             </tr>
@@ -143,25 +143,25 @@
                     {{player.curgames}}
                 </th>
                 <th>
-                    {{player.batterdatals_set.all.first.PA}}
+                    {{player.batterdatals_set.all.first.PAl}}
                 </th>
                 <th>
-                    {{player.batterdatals_set.all.first.AVG}}
+                    {{player.batterdatals_set.all.first.AVGl}}
                 </th>
                 <th>
-                    {{player.batterdatals_set.all.first.OBP}}
+                    {{player.batterdatals_set.all.first.OBPl}}
                 </th>
                 <th>
-                    {{player.batterdatals_set.all.first.SLG}}
+                    {{player.batterdatals_set.all.first.SLGl}}
                 </th>
                 <th>
-                    {{player.batterdatals_set.all.first.hit}}
+                    {{player.batterdatals_set.all.first.hitl}}
                 </th>
                 <th>
-                    {{player.batterdatals_set.all.first.homerun}}
+                    {{player.batterdatals_set.all.first.homerunl}}
                 </th>
                 <th>
-                    {{player.batterdatals_set.all.first.BOB}}
+                    {{player.batterdatals_set.all.first.BOBl}}
                 </th>
 
             </tr>
@@ -190,17 +190,11 @@
     {% for answer in reply.object_list.all %}
     <div class="card my-3">
         <div class="card-body">
-            <div class="card-text" style="white-space: pre-line;">{{ answer.content }}</div>
-            <div class="badge bg-light text-dark p-2 text-start" style="float:left!important">
-                <div class="mb-2">{{ answer.author.username }}</div>
-                <div>{{ answer.create_date }}</div>
-            </div>
-            {% if answer.modify_date %}
-            <div class="badge bg-light text-dark p-2 text-start mx-3"style="float:left!important">
-                <div class="mb-2">modified at</div>
-                <div>{{ answer.modify_date }}</div>
-            </div>
-            {% endif %}
+            <div class="card-text" style="white-space: pre-line;">{{ answer.content }}<div class="badge bg-light text-dark p-2 text-start" style="padding-bottom: 0!important;" >
+                <div class="mb-2">{{ answer.author.username }} {% if answer.modify_date %}
+                    (수정됨)
+                    {% endif %}</div>
+            </div></div>
             <a href="javascript:void(0)" data-uri="{% url 'doobo:reply_voted' answer.id  %}"
             class="recommend btn btn-sm btn-outline-secondary "style="float:right!important" >싫어요 {% for i in answer.voterd.all%}
             {%if i.id == user.id %}
@@ -222,7 +216,7 @@
          {% if request.user == answer.author %}
          <br>
          <br>
-            <div class="my-3" style="float:left!important; margin-top:0px!important;margin-bottom:0px!important;">
+            <div class="my-3" style="float:right!important; margin-top:0px!important;margin-bottom:0px!important;">
                 
                 <a href="{% url 'doobo:reply_modify' answer.id  %}" 
                 class="btn btn-sm btn-outline-secondary">수정</a>
@@ -250,7 +244,7 @@
         {% for page_number in reply.paginator.page_range %}
         {% if page_number >= reply.number|add:-5 and page_number <= reply.number|add:5 %}
         {% if page_number == reply.number %}
-        <li class="page-item active navy borderblack " aria-current="page">
+        <li class="page-item active navy" aria-current="page">
             <a class="page-link navy" href="?page={{ page_number }}">{{ page_number }}</a>
         </li>
         {% else %}

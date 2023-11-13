@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Player, BatterData,PitcherData,Reply
 from django.utils import timezone
 from django.http import HttpResponseNotAllowed
-from .forms import ReplyForm
+from .forms import ReplyForm,PitcherForm,PitcherDataForm,PitcherLSForm,BatterForm,BatterDataForm,BatterLSForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator  
 def index(request):
@@ -112,3 +112,47 @@ def reply_voted(request, reply_id):
     else:
         reply.voterd.add(request.user)
     return redirect('doobo:detail', player_id=reply.player.id)
+def pitcher_add(request):
+    if request.method == 'POST':
+        form = PitcherForm(request.POST)
+        form2 = PitcherDataForm(request.POST)
+        form3 = PitcherLSForm(request.POST)
+        if form.is_valid():
+            player = form.save(commit=False)
+            player.ispitcher=True
+            player.save()
+            pitcherdata=form2.save(commit=False)
+            pitcherdata.player=player
+            pitcherdata.save()
+            pitcherdatals=form3.save(commit=False)
+            pitcherdatals.player=player
+            pitcherdatals.save()
+            return redirect('doobo:index')
+    else:
+        form = PitcherForm()
+        form2 = PitcherDataForm()
+        form3 = PitcherLSForm()
+    context = {'form': form,'form2':form2,'form3':form3}
+    return render(request, 'dooboard/pitcher_form.html', context)
+def batter_add(request):
+    if request.method == 'POST':
+        form = BatterForm(request.POST)
+        form2 = BatterDataForm(request.POST)
+        form3 = BatterLSForm(request.POST)
+        if form.is_valid():
+            player = form.save(commit=False)
+            player.ispitcher=False
+            player.save()
+            batterdata=form2.save(commit=False)
+            batterdata.player=player
+            batterdata.save()
+            batterdatals=form3.save(commit=False)
+            batterdatals.player=player
+            batterdatals.save()
+            return redirect('doobo:index')
+    else:
+        form = BatterForm()
+        form2 = BatterDataForm()
+        form3 = BatterLSForm()
+    context = {'form': form,'form2':form2,'form3':form3}
+    return render(request, 'dooboard/batter_form.html', context)

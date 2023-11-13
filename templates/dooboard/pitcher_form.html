@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- 답변 수정-->
+<div class="container my-3 entireboard">
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        {{form2.as_p}}
+        {{form3.as_p}}
+        <button type="submit" class="btn btn-primary">저장하기</button>
+    </form>
+</div>
+{% endblock %}
