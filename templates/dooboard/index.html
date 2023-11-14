@@ -1,10 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="entireboard">
+        
+        <div style="float:left;width: 100%; margin-bottom: 50px;" >
+            <h5>정렬 기준:</h5>
+            <a href="?sort=1" class="btn btn-primary" style="background-color:#131230!important;">등번호순</a>
+            <a href="?sort=2" class="btn btn-primary" style="background-color:#131230!important;">좋아요순</a>
+            <a href="?sort=3" class="btn btn-primary" style="background-color:#131230!important;">싫어요순</a>
+            <a href="?sort=4" class="btn btn-primary" style="background-color:#131230!important;">댓글순</a>
+        </div>
     {% if player_list %}
     <div class="tpos"><h1>투수</h1></div>
     {% for player in player_list %}
     {% if player.pitcherdata_set.count %}
+    
     <a href="{% url 'doobo:detail' player.id %}">
         <div class="box">
             <img class="img" src="{{player.image}}" alt="선수 사진">
@@ -66,8 +75,6 @@
     {% if user.verified_set %}
     <div style="float:left;width: 100%; margin-bottom: 50px;" >
         <a href="{% url 'doobo:pitcher_add' %}" class="btn btn-primary" style="background-color:#131230!important;">투수 등록</a>
-    </div>
-    <div style="float:left;width: 100%; margin-bottom: 50px;" >
         <a href="{% url 'doobo:batter_add' %}" class="btn btn-primary" style="background-color:#131230!important;">타자 등록</a>
     </div>
     {%endif%}

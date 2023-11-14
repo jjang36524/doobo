@@ -6,8 +6,22 @@ from django.http import HttpResponseNotAllowed
 from .forms import ReplyForm,PitcherForm,PitcherDataForm,PitcherLSForm,BatterForm,BatterDataForm,BatterLSForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator  
+from django.db.models import Count
 def index(request):
-    player_list = Player.objects.order_by('no')
+    sorts=request.GET.get('sort','1')
+    player_list = Player.objects
+    print(type(sorts))
+    if sorts=='1':
+        player_list=player_list.order_by("no")
+    elif sorts=='2':
+        print(sorts)
+        player_list=player_list.annotate(voteu_count=Count('voteru')).order_by('-voteu_count','no')
+    elif sorts=='3':
+        player_list=player_list.annotate(voted_count=Count('voterd')).order_by('-voted_count','no')
+    elif sorts=='4':
+        player_list=player_list.annotate(reply_count=Count('reply')).order_by('-reply_count','no')
+    else:
+        player_list=player_list.order_by("no")
     batterdata = BatterData.objects.order_by('player')
     pitcherdata = PitcherData.objects.order_by('player')
     context = {'player_list': player_list,'batterdata':batterdata,'pitcherdata':pitcherdata}
