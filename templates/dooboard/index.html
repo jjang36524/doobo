@@ -1,13 +1,36 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="entireboard">
-        
         <div style="float:left;width: 100%; margin-bottom: 50px;" >
             <h5>정렬 기준:</h5>
+
+            {% if sorts == "1" %}
+            <a href="?sort=1" class="btn btn-primary" style="background-color:#ED1C24!important;">등번호순</a>
+            <a href="?sort=2" class="btn btn-primary" style="background-color:#131230!important;">좋아요순</a>
+            <a href="?sort=3" class="btn btn-primary" style="background-color:#131230!important;">싫어요순</a>
+            <a href="?sort=4" class="btn btn-primary" style="background-color:#131230!important;">댓글순</a>
+            {% elif sorts == "2" %}
+            <a href="?sort=1" class="btn btn-primary" style="background-color:#131230!important;">등번호순</a>
+            <a href="?sort=2" class="btn btn-primary" style="background-color:#ED1C24!important;">좋아요순</a>
+            <a href="?sort=3" class="btn btn-primary" style="background-color:#131230!important;">싫어요순</a>
+            <a href="?sort=4" class="btn btn-primary" style="background-color:#131230!important;">댓글순</a>
+            {% elif sorts == "3" %}
+            <a href="?sort=1" class="btn btn-primary" style="background-color:#131230!important;">등번호순</a>
+            <a href="?sort=2" class="btn btn-primary" style="background-color:#131230!important;">좋아요순</a>
+            <a href="?sort=3" class="btn btn-primary" style="background-color:#ED1C24!important;">싫어요순</a>
+            <a href="?sort=4" class="btn btn-primary" style="background-color:#131230!important;">댓글순</a>
+            {% elif sorts == "4" %}
+            <a href="?sort=1" class="btn btn-primary" style="background-color:#131230!important;">등번호순</a>
+            <a href="?sort=2" class="btn btn-primary" style="background-color:#131230!important;">좋아요순</a>
+            <a href="?sort=3" class="btn btn-primary" style="background-color:#131230!important;">싫어요순</a>
+            <a href="?sort=4" class="btn btn-primary" style="background-color:#ED1C24!important;">댓글순</a>
+            {% else %}
             <a href="?sort=1" class="btn btn-primary" style="background-color:#131230!important;">등번호순</a>
             <a href="?sort=2" class="btn btn-primary" style="background-color:#131230!important;">좋아요순</a>
             <a href="?sort=3" class="btn btn-primary" style="background-color:#131230!important;">싫어요순</a>
             <a href="?sort=4" class="btn btn-primary" style="background-color:#131230!important;">댓글순</a>
+            {%endif%}
+            
         </div>
     {% if player_list %}
     <div class="tpos"><h1>투수</h1></div>

@@ -24,7 +24,7 @@ def index(request):
         player_list=player_list.order_by("no")
     batterdata = BatterData.objects.order_by('player')
     pitcherdata = PitcherData.objects.order_by('player')
-    context = {'player_list': player_list,'batterdata':batterdata,'pitcherdata':pitcherdata}
+    context = {'player_list': player_list,'batterdata':batterdata,'pitcherdata':pitcherdata,'sorts':sorts}
     return render(request, 'dooboard/index.html', context)
 def detail(request, player_id):
     page=request.GET.get('page','1')
