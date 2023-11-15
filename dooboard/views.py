@@ -1,12 +1,13 @@
 from django.shortcuts import render,get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import Player, BatterData,PitcherData,Reply
+from .models import Player, BatterData,PitcherData,Reply,Verified,BatterDataLS,PitcherDataLS
 from django.utils import timezone
 from django.http import HttpResponseNotAllowed
 from .forms import ReplyForm,PitcherForm,PitcherDataForm,PitcherLSForm,BatterForm,BatterDataForm,BatterLSForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator  
 from django.db.models import Count
+from django.contrib import messages
 def index(request):
     sorts=request.GET.get('sort','1')
     player_list = Player.objects
@@ -126,7 +127,15 @@ def reply_voted(request, reply_id):
     else:
         reply.voterd.add(request.user)
     return redirect('doobo:detail', player_id=reply.player.id)
+@login_required(login_url='common:login')
 def pitcher_add(request):
+    try:
+        if not Verified.objects.get(user=request.user):
+            messages.error(request, '수정권한이 없습니다')
+            return redirect('doobo:index')
+    except:
+        messages.error(request, '수정권한이 없습니다')
+        return redirect('doobo:index')
     if request.method == 'POST':
         form = PitcherForm(request.POST)
         form2 = PitcherDataForm(request.POST)
@@ -148,7 +157,16 @@ def pitcher_add(request):
         form3 = PitcherLSForm()
     context = {'form': form,'form2':form2,'form3':form3}
     return render(request, 'dooboard/pitcher_form.html', context)
+@login_required(login_url='common:login')
 def batter_add(request):
+    try:
+        if not Verified.objects.get(user=request.user):
+            messages.error(request, '수정권한이 없습니다')
+            return redirect('doobo:index')
+    except:
+        print(1)
+        messages.error(request, '수정권한이 없습니다')
+        return redirect('doobo:index')
     if request.method == 'POST':
         form = BatterForm(request.POST)
         form2 = BatterDataForm(request.POST)
@@ -170,3 +188,93 @@ def batter_add(request):
         form3 = BatterLSForm()
     context = {'form': form,'form2':form2,'form3':form3}
     return render(request, 'dooboard/batter_form.html', context)
+@login_required(login_url='common:login')
+def batter_modify(request, player_id):
+    player = get_object_or_404(Player, pk=player_id)
+    try:
+        if not Verified.objects.get(user=request.user):
+            messages.error(request, '수정권한이 없습니다')
+            return redirect('doobo:index')
+    except:
+        print(1)
+        messages.error(request, '수정권한이 없습니다')
+        return redirect('doobo:index')
+    if request.method == "POST":
+        form = BatterForm(request.POST)
+        form2 = BatterDataForm(request.POST)
+        form3 = BatterLSForm(request.POST)
+        if form.is_valid():
+            player = form.save(commit=False)
+            player.ispitcher=False
+            player.save()
+            batterdata=form2.save(commit=False)
+            batterdata.player=player
+            batterdata.save()
+            batterdatals=form3.save(commit=False)
+            batterdatals.player=player
+            batterdatals.save()
+            return redirect('doobo:detail', player_id=player.id)
+    else:
+        form = BatterForm(instance=player)
+        form2 = BatterDataForm(instance=BatterData.objects.get(player=player))
+        form3 = BatterLSForm(instance=BatterDataLS.objects.get(player=player))
+    context = {'form': form,'form2':form2,'form3':form3}
+    return render(request, 'dooboard/batter_form.html', context)
+@login_required(login_url='common:login')
+def pitcher_modify(request, player_id):
+    player = get_object_or_404(Player, pk=player_id)
+    try:
+        if not Verified.objects.get(user=request.user):
+            messages.error(request, '수정권한이 없습니다')
+            return redirect('doobo:index')
+    except:
+        print(1)
+        messages.error(request, '수정권한이 없습니다')
+        return redirect('doobo:index')
+    if request.method == "POST":
+        form = PitcherForm(request.POST)
+        form2 = PitcherDataForm(request.POST)
+        form3 = PitcherLSForm(request.POST)
+        if form.is_valid():
+            player = form.save(commit=False)
+            player.ispitcher=False
+            player.save()
+            pitcherdata=form2.save(commit=False)
+            pitcherdata.player=player
+            pitcherdata.save()
+            pitcherdatals=form3.save(commit=False)
+            pitcherdatals.player=player
+            pitcherdatals.save()
+            return redirect('doobo:detail', player_id=player.id)
+    else:
+        form = PitcherForm(instance=player)
+        form2 = PitcherDataForm(instance=PitcherData.objects.get(player=player))
+        form3 = PitcherLSForm(instance=PitcherDataLS.objects.get(player=player))
+    context = {'form': form,'form2':form2,'form3':form3}
+    return render(request, 'dooboard/pitcher_form.html', context)
+@login_required(login_url='common:login')
+def batter_remove(request, player_id):
+    player = get_object_or_404(Player, pk=player_id)
+    try:
+        if not Verified.objects.get(user=request.user):
+            messages.error(request, '수정권한이 없습니다')
+            return redirect('doobo:index')
+    except:
+        print(1)
+        messages.error(request, '수정권한이 없습니다')
+        return redirect('doobo:index')
+    player.delete()
+    return redirect('doobo:index')
+@login_required(login_url='common:login')
+def pitcher_remove(request, player_id):
+    player = get_object_or_404(Player, pk=player_id)
+    try:
+        if not Verified.objects.get(user=request.user):
+            messages.error(request, '수정권한이 없습니다')
+            return redirect('doobo:index')
+    except:
+        print(1)
+        messages.error(request, '수정권한이 없습니다')
+        return redirect('doobo:index')
+    player.delete()
+    return redirect('doobo:index')

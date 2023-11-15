@@ -56,10 +56,11 @@
                 {%endif%}</span><br>
                 <span class="smalltext">통산 방어율 {{player.pitcherdata_set.all.first.ERA}}</span><br>
                 <span class="smalltext">{{player.handtype}}</span><br>
-                <br>
                 <span class="smalltext">댓글 {{player.reply_set.count}}개, 좋아요 {{player.voteru.count}}개, 싫어요 {{player.voterd.count}}개</span>
             </div>
+            
         </div>
+        
     </a>
     
     {% endif %}
@@ -95,7 +96,7 @@
     {% endif %}
     {%endfor%}
     {% endif %}
-    {% if user.verified_set %}
+    {% if user.verified_set.count %}
     <div style="float:left;width: 100%; margin-bottom: 50px;" >
         <a href="{% url 'doobo:pitcher_add' %}" class="btn btn-primary" style="background-color:#131230!important;">투수 등록</a>
         <a href="{% url 'doobo:batter_add' %}" class="btn btn-primary" style="background-color:#131230!important;">타자 등록</a>

@@ -30,4 +30,8 @@ urlpatterns = [
     path('player/rvoted/<int:reply_id>/',views.reply_voted, name='reply_voted'),
     path('add/pitcher', views.pitcher_add, name='pitcher_add'),
     path('add/batter', views.batter_add, name='batter_add'),
+    path('batter/modify/<int:player_id>',views.batter_modify,name='batter_modify'),
+    path('pitcher/modify/<int:player_id>',views.pitcher_modify,name='pitcher_modify'),
+    path('batter/remove/<int:player_id>/', views.batter_remove, name='batter_remove'),
+    path('pitcher/remove/<int:player_id>/', views.pitcher_remove, name='pitcher_remove'),
 ]

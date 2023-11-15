@@ -168,6 +168,7 @@
         </tbody>
     </table>
     {% endif %}
+    
     <a href="javascript:void(0)" data-uri="{% url 'doobo:player_voteu' player.id  %}"
                class="recommend btn btn-sm btn-outline-secondary"> 좋아요  {% for i in player.voteru.all%}
                {%if i.id == user.id %}
@@ -184,6 +185,17 @@
             {%endfor%}
              <span class="badge rounded-pill bg-success red">{{player.voterd.count}}</span>
          </a>
+         {% if user.verified_set.count %}
+         {% if player.ispitcher %}
+         <a href="{% url 'doobo:pitcher_modify' player.id %}" class="btn btn-primary" style="background-color:#131230!important;margin:0px!important">수정</a>
+            <a href="javascript:void(0)"data-uri="{% url 'doobo:pitcher_remove' player.id %}" class="btn btn-primary delete" style="background-color:#131230!important;margin:0px!important">삭제</a>
+         {%else%}
+         <a href="{% url 'doobo:batter_modify' player.id %}" class="btn btn-primary" style="background-color:#131230!important;margin:0px!important">수정</a>
+            <a href="javascript:void(0)"data-uri="{% url 'doobo:batter_remove' player.id %}" class="btn btn-primary delete" style="background-color:#131230!important;margin:0px!important">삭제</a>
+         {%endif%}
+         {%endif%}
+        </div>
+        
 </div>
 
 <h5 class="border-bottom my-3 py-2">{{player.reply_set.count}}개의 댓글이 있습니다.</h5>
