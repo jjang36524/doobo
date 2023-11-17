@@ -46,11 +46,9 @@ def reply_create(request, player_id):
             reply.player = player
             reply.author=request.user
             reply.save()
-            return redirect('doobo:detail',player_id=player.id)
+        return redirect('doobo:detail',player_id=player.id)
     else:
         return HttpResponseNotAllowed('Only POST is possible.')
-    context = {'player': player, 'form': form}
-    return render(request, 'dooboard/detail.html', context)
 @login_required(login_url='common:login')
 def reply_modify(request, reply_id):
     reply = get_object_or_404(Reply, pk=reply_id)
@@ -200,11 +198,13 @@ def batter_modify(request, player_id):
         messages.error(request, '수정권한이 없습니다')
         return redirect('doobo:index')
     if request.method == "POST":
-        form = BatterForm(request.POST)
-        form2 = BatterDataForm(request.POST)
-        form3 = BatterLSForm(request.POST)
+        form = BatterForm(request.POST,instance=player)
+        form2 = BatterDataForm(request.POST,instance=BatterData.objects.get(player=player))
+        form3 = BatterLSForm(request.POST,instance=BatterDataLS.objects.get(player=player))
         if form.is_valid():
+            print(player.id)
             player = form.save(commit=False)
+            print(player.id)
             player.ispitcher=False
             player.save()
             batterdata=form2.save(commit=False)
@@ -232,12 +232,12 @@ def pitcher_modify(request, player_id):
         messages.error(request, '수정권한이 없습니다')
         return redirect('doobo:index')
     if request.method == "POST":
-        form = PitcherForm(request.POST)
-        form2 = PitcherDataForm(request.POST)
-        form3 = PitcherLSForm(request.POST)
+        form = PitcherForm(request.POST,instance=player)
+        form2 = PitcherDataForm(request.POST,instance=PitcherData.objects.get(player=player))
+        form3 = PitcherLSForm(request.POST,instance=PitcherDataLS.objects.get(player=player))
         if form.is_valid():
             player = form.save(commit=False)
-            player.ispitcher=False
+            player.ispitcher=True
             player.save()
             pitcherdata=form2.save(commit=False)
             pitcherdata.player=player

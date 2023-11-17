@@ -3,6 +3,18 @@
 <!-- 답변 수정-->
 <div class="container my-3 entireboard">
     <form method="post">
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field in form %}
+            {% if field.errors %}
+            <div>
+                <strong>{{ field.label }}</strong>
+                {{ field.errors }}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
         {% csrf_token %}
         {{form.as_p}}
         {{form2.as_p}}

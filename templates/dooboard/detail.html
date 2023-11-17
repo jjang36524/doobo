@@ -280,6 +280,18 @@
     <!-- 페이징처리 끝 -->
     <form action="{% url 'doobo:reply_create' player.id %}" method="post" class="my-3">
         {% csrf_token %}
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field in form %}
+            {% if field.errors %}
+            <div>
+                <strong>{{ field.label }}</strong>
+                {{ field.errors }}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
         <div class="mb-3">
             <label for="content" class="form-label">답변내용</label>
             <textarea {% if not user.is_authenticated %}disabled{% endif %}
