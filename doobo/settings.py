@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-sorow(zqc0ka!ial@1k2&*=iu%gl&&^8!rx#^syid-b9(dz7y1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['dooboard.pythonanywhere.com','127.0.0.1']
+ALLOWED_HOSTS = ['dooboard.pythonanywhere.com','Gfriend.pythonanywhere.com','127.0.0.1']
 
 
 # Application definition

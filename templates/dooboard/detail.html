@@ -198,9 +198,9 @@
         
 </div>
 
-<h5 class="border-bottom my-3 py-2">{{player.reply_set.count}}개의 댓글이 있습니다.</h5>
+<h5 class="border-bottom my-3 py-2" style="margin-left: 50px!important;margin-right: 50px!important;">{{player.reply_set.count}}개의 댓글이 있습니다.</h5>
     {% for answer in reply.object_list.all %}
-    <div class="card my-3">
+    <div class="card my-3" style="margin-left: 50px!important;margin-right: 50px!important;">
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;">{{ answer.content }}<div class="badge bg-light text-dark p-2 text-start" style="padding-bottom: 0!important;" >
                 <div class="mb-2">{{ answer.author.username }} {% if answer.modify_date %}
@@ -292,12 +292,12 @@
             {% endfor %}
         </div>
         {% endif %}
-        <div class="mb-3">
+        <div class="mb-3" style="margin-left: 50px!important;margin-right: 50px!important;">
             <label for="content" class="form-label">답변내용</label>
             <textarea {% if not user.is_authenticated %}disabled{% endif %}
               name="content" id="content" class="form-control" rows="10"></textarea>
         </div>
-        <input type="submit" value="답변등록" class="btn btn-primary" style="background-color:#131230!important;">
+        <input type="submit" value="답변등록" class="btn btn-primary" style="background-color:#131230!important;margin-left: 50px!important;margin-right: 50px!important;">
     </form>
     
     
